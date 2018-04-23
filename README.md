@@ -21,3 +21,5 @@ Parchment wards against Wizard
 Wizard transmutes boulder
 
 Boulder crushes Shears
+
+one more test
