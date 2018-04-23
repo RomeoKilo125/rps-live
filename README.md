@@ -21,3 +21,5 @@ Parchment wards against Wizard
 Wizard transmutes boulder
 
 Boulder crushes Shears
+
+an arbitrary change to the readme to test git connection to github.
