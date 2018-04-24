@@ -10,6 +10,40 @@ game = function() {
   };
   firebase.initializeApp(config);
 
+  let database = firebase.database();
+  let connections = database.ref('/connections');
+  let connected = database.ref('.info/connected');
+  let numOfPlayers = 0;
+  let score1 = 0
+  let score2 = 0
+
+  startGame = function() {
+    score1 = 0;
+    score2 = 0;
+    console.log()
+
+  }
+
+  connected.on('value', function(snapshot) {
+
+    if (snapshot.val()) {
+      let con = connections.push(true);
+
+      con.onDisconnect().remove();
+    }
+
+  });
+
+  connections.on('value', function(snapshot) {
+
+    numOfPlayers = snapshot.numChildren();
+    console.log(numOfPlayers);
+    if (numOfPlayers === 2) {
+      startGame();
+    }
+  });
+
+
 }
 
 $(document).ready(function() {
