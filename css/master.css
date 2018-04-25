@@ -11,6 +11,12 @@ div {
   border: solid 1px white;
 }
 
+h3 {
+  font-size: 2em;
+  font-weight: 700;
+  margin: 25px;
+}
+
 #container {
   display: grid;
   width: 1200px;
@@ -39,6 +45,19 @@ div {
 }
 
 .weapon::after {
+  content: "";
+  vertical-align: middle;
+  height: 100%;
+  width: 1px;
+  display: inline-block;
+}
+
+#scoreArea {
+  text-align: center;
+  font-size: 2em;
+}
+
+#scoreArea::after {
   content: "";
   vertical-align: middle;
   height: 100%;

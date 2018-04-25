@@ -32,6 +32,8 @@ game = function() {
     myScore = 0;
     theirScore = 0;
 
+    $('#score').text("YOU " + myScore + " : " + theirScore + " THEM");
+
     weapons.set({
       1: '',
       2: ''
