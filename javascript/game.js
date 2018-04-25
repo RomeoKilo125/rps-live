@@ -11,39 +11,51 @@ game = function() {
   firebase.initializeApp(config);
 
   let database = firebase.database();
+  let weapons = database.ref('/weapons');
+  let score = database.ref('/score');
   let connections = database.ref('/connections');
   let connected = database.ref('.info/connected');
   let numOfPlayers = 0;
-  let score1 = 0
-  let score2 = 0
+  let myScore = 0;
+  let theirScore = 0;
+  let playerID = "";
+
+  getPlayerID = function() {
+    connections.once('value', function(snap) {
+      playerID = snap.numChildren().toString();
+      console.log("Player ID: " + playerID);
+      score.child(playerID).set(myScore);
+    });
+  }
 
   startGame = function() {
-    score1 = 0;
-    score2 = 0;
-    console.log(score1 + ":" + score2);
+    myScore = 0;
+    theirScore = 0;
 
+    weapons.set({
+      1: '',
+      2: ''
+    });
   }
 
   connected.on('value', function(snapshot) {
-
     if (snapshot.val()) {
       let con = connections.push(true);
-
+      getPlayerID();
       con.onDisconnect().remove();
     }
-
   });
 
   connections.on('value', function(snapshot) {
-
     numOfPlayers = snapshot.numChildren();
-    console.log(numOfPlayers);
-    if (numOfPlayers === 2) {
-      startGame();
-    }
+    numOfPlayers === 2 ? startGame() : '';
   });
 
-
+  $('.weapon').on('click', function(event) {
+    let selectedWeapon = $(this).attr('id');
+    console.log(selectedWeapon);
+    weapons.child(playerID).set(selectedWeapon);
+  });
 }
 
 $(document).ready(function() {

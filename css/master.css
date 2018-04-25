@@ -28,3 +28,20 @@ div {
   height: 800px;
   width: 800px;
 }
+
+.weapon {
+  float: left;
+  height: 100px;
+  width: 100px;
+  margin: 10px;
+  text-align: center;
+  font-size: 3em;
+}
+
+.weapon::after {
+  content: "";
+  vertical-align: middle;
+  height: 100%;
+  width: 1px;
+  display: inline-block;
+}
