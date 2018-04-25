@@ -20,7 +20,7 @@ game = function() {
   startGame = function() {
     score1 = 0;
     score2 = 0;
-    console.log()
+    console.log(score1 + ":" + score2);
 
   }
 
