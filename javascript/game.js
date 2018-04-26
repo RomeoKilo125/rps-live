@@ -18,6 +18,8 @@ game = function() {
   let users = database.ref('/users');
   let connected = database.ref('.info/connected');
   let numOfPlayers = 0;
+  let player1Score = 0;
+  let player2Score = 0;
   let myScore = 0;
   let theirScore = 0;
 
@@ -39,11 +41,13 @@ game = function() {
   }
 
   startGame = function() {
-    console.log('startgame');
-    myScore = 0;
-    theirScore = 0;
 
-    $('#score').text("YOU " + myScore + " : " + theirScore + " THEM");
+    $('#score').text("ME 0 : 0 THEM");
+
+    score.set({
+      'player1': 0,
+      'player2': 0
+    })
 
     weapons.set({
       'player1': '',
@@ -67,14 +71,41 @@ game = function() {
   });
 
   users.on('value', function(snapshot) {
-    console.log(playerID);
     if (playerID && snapshot.val().player1.status && snapshot.val().player2.status) {
       startGame();
     }
   });
 
   weapons.on('value', function(snapshot) {
-    
+    if (snapshot.val().player1 && snapshot.val().player2) {
+      let weapon1 = snapshot.val().player1;
+      let weapon2 = snapshot.val().player2;
+
+      if (weapon1 === weapon2) {
+        $('#result').html('<h3>TIE</h3>');
+        return;
+      } else if (
+        (weapon1 === 'S' && weapon2 === 'P') ||
+        (weapon1 === 'P' && weapon2 === 'B') ||
+        (weapon1 === 'B' && weapon2 === 'D') ||
+        (weapon1 === 'D' && weapon2 === 'W') ||
+        (weapon1 === 'W' && weapon2 === 'S') ||
+        (weapon1 === 'S' && weapon2 === 'D') ||
+        (weapon1 === 'D' && weapon2 === 'P') ||
+        (weapon1 === 'P' && weapon2 === 'W') ||
+        (weapon1 === 'W' && weapon2 === 'B') ||
+        (weapon1 === 'B' && weapon2 === 'S')
+      ) {
+        score.child('player1').set()
+      } else {
+
+      }
+
+      setTimeout(function() {
+        $('#result').empty()
+      }, 3000);
+      weapons.child(playerID).set('');
+    }
   });
 
   $('.weapon').on('click', function(event) {
@@ -82,7 +113,6 @@ game = function() {
       return
     }
     let selectedWeapon = $(this).attr('id');
-    console.log(selectedWeapon);
     weapons.child(playerID).set(selectedWeapon);
   });
 }

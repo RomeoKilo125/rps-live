@@ -35,6 +35,13 @@ h3 {
   width: 800px;
 }
 
+#result {
+  text-align: center;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
 .weapon {
   float: left;
   height: 100px;
