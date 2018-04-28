@@ -8,10 +8,14 @@ body {
   font-family: 'Berkshire Swash', cursive;
 }
 
-h3 {
+h1 h3 {
   /* font-size: 2em; */
   font-weight: 700;
   margin: 25px;
+}
+
+h1 {
+  font-size: 4em;
 }
 
 #container {
@@ -33,6 +37,7 @@ h3 {
 #gameArea {
   height: 800px;
   width: 800px;
+  text-align: center;
 }
 
 #result {
@@ -69,6 +74,7 @@ h3 {
 #chatArea {
   padding: 5px;
   background-color: #555;
+  line-height: 1.25;
   font-family: 'Open Sans', sans-serif;
 }
 

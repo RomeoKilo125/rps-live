@@ -30,7 +30,7 @@ game = function() {
       } else {
         playerID = 'player1';
       }
-      // console.log("Game Player ID: " + playerID);
+      console.log("Game Player ID: " + playerID);
       chat(playerID);
       score.child(playerID).set(myScore);
       weapons.child(playerID).set('');
@@ -80,6 +80,7 @@ game = function() {
   });
 
   weapons.on('value', function(snapshot) {
+    if (!snapshot.val()) {return;}
     if (snapshot.val().player1 && snapshot.val().player2) {
       let weapon1 = snapshot.val().player1;
       let weapon2 = snapshot.val().player2;
