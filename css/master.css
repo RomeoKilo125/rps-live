@@ -8,7 +8,7 @@ body {
 }
 
 div {
-  border: solid 1px white;
+  /* border: solid 1px white; */
 }
 
 h3 {
@@ -43,12 +43,12 @@ h3 {
 }
 
 .weapon {
-  float: left;
   height: 100px;
-  width: 100px;
-  margin: 10px;
+  width: 500px;
+  margin: 25px auto;
   text-align: center;
   font-size: 3em;
+  background-color: #600;
 }
 
 .weapon::after {
@@ -62,12 +62,19 @@ h3 {
 #scoreArea {
   text-align: center;
   font-size: 2em;
+  border-bottom: solid 3px grey;
+  border-top: solid 3px grey;
+  border-left: solid 3px grey;
 }
 
-#scoreArea::after {
-  content: "";
-  vertical-align: middle;
-  height: 100%;
-  width: 1px;
-  display: inline-block;
+#chatArea {
+  border-left: solid 3px grey;
+  padding: 10px;
+}
+
+#chatInput {
+  border-bottom: solid 3px grey;
+  border-top: solid 3px grey;
+  border-left: solid 3px grey;
+  padding: 10px;
 }

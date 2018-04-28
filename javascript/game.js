@@ -47,7 +47,7 @@ game = function() {
     score.set({
       'player1': 0,
       'player2': 0
-    })
+    });
 
     weapons.set({
       'player1': '',
@@ -82,8 +82,7 @@ game = function() {
       let weapon2 = snapshot.val().player2;
 
       if (weapon1 === weapon2) {
-        $('#result').html('<h3>TIE</h3>');
-        return;
+        $('#score').html('<h3>TIE</h3>');
       } else if (
         (weapon1 === 'S' && weapon2 === 'P') ||
         (weapon1 === 'P' && weapon2 === 'B') ||
@@ -96,13 +95,35 @@ game = function() {
         (weapon1 === 'W' && weapon2 === 'B') ||
         (weapon1 === 'B' && weapon2 === 'S')
       ) {
-        score.child('player1').set()
+        player1Score++;
+        $('#score').html('<h3>PLAYER 1!</h3>');
       } else {
-
+        player2Score++;
+        $('#score').html('<h3>PLAYER 2!</h3>');
       }
 
+      score.set({
+        'player1': player1Score,
+        'player2': player2Score
+      });
+
       setTimeout(function() {
-        $('#result').empty()
+        if (playerID === 'player1') {
+          $('#score').text("YOU " + player1Score + " : THEM " + player2Score);
+        } else {
+          $('#score').text("YOU " + player2Score + " : THEM " + player1Score);
+        }
+
+        if (playerID === 'player1' && player1Score === 5) {
+          $('#score').text("YOU WIN!!");
+        } else if (playerID === 'player1' && player2Score === 5) {
+          $('#score').text("YOU LOSE...");
+        } else if (playerID === 'player2' && player2Score === 5) {
+          $('#score').text("YOU WIN!!");
+        } else if (playerID === 'player2' && player1Score === 5) {
+          $('#score').text("YOU LOSE...");
+        }
+
       }, 3000);
       weapons.child(playerID).set('');
     }
