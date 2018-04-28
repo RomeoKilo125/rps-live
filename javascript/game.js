@@ -30,7 +30,8 @@ game = function() {
       } else {
         playerID = 'player1';
       }
-      console.log("Player ID: " + playerID);
+      // console.log("Game Player ID: " + playerID);
+      chat(playerID);
       score.child(playerID).set(myScore);
       weapons.child(playerID).set('');
     }).then(function() {
@@ -42,7 +43,7 @@ game = function() {
 
   startGame = function() {
 
-    $('#score').text("ME 0 : 0 THEM");
+    $('#score').text("YOU 0 : THEM 0");
 
     score.set({
       'player1': 0,
@@ -53,7 +54,9 @@ game = function() {
       'player1': '',
       'player2': ''
     });
-  }
+
+    startChat()
+}
 
   connected.on('value', function(snapshot) {
     if (snapshot.val()) {
@@ -114,14 +117,17 @@ game = function() {
           $('#score').text("YOU " + player2Score + " : THEM " + player1Score);
         }
 
-        if (playerID === 'player1' && player1Score === 5) {
-          $('#score').text("YOU WIN!!");
-        } else if (playerID === 'player1' && player2Score === 5) {
-          $('#score').text("YOU LOSE...");
-        } else if (playerID === 'player2' && player2Score === 5) {
-          $('#score').text("YOU WIN!!");
-        } else if (playerID === 'player2' && player1Score === 5) {
-          $('#score').text("YOU LOSE...");
+        if (player1Score === 5 || player2Score === 5) {
+          if (playerID === 'player1' && player1Score === 5) {
+            $('#score').text("YOU WIN!!");
+          } else if (playerID === 'player1' && player2Score === 5) {
+            $('#score').text("YOU LOSE...");
+          } else if (playerID === 'player2' && player2Score === 5) {
+            $('#score').text("YOU WIN!!");
+          } else if (playerID === 'player2' && player1Score === 5) {
+            $('#score').text("YOU LOSE...");
+          }
+          setTimeout(startGame, 3000);
         }
 
       }, 3000);
