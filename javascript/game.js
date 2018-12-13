@@ -143,9 +143,17 @@ game = function() {
     if (!playerID) {
       return
     }
+    let playerWeapon
+    weapons.once('value', function(snapshot) {
+      playerWeapon = snapshot.child(playerID).val();
+    });
+    if (playerWeapon) {
+      return
+    }
     let selectedWeapon = $(this).attr('id');
     $(this).addClass('selected')
     weapons.child(playerID).set(selectedWeapon);
+    // console.log(playerWeapon);
   });
 }
 
