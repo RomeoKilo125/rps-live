@@ -56,7 +56,7 @@ game = function() {
     });
 
     startChat()
-}
+  }
 
   connected.on('value', function(snapshot) {
     if (snapshot.val()) {
@@ -80,7 +80,9 @@ game = function() {
   });
 
   weapons.on('value', function(snapshot) {
-    if (!snapshot.val()) {return;}
+    if (!snapshot.val()) {
+      return;
+    }
     if (snapshot.val().player1 && snapshot.val().player2) {
       let weapon1 = snapshot.val().player1;
       let weapon2 = snapshot.val().player2;
@@ -130,6 +132,7 @@ game = function() {
           }
           setTimeout(startGame, 3000);
         }
+        $('.weapon').removeClass('selected');
 
       }, 3000);
       weapons.child(playerID).set('');
@@ -141,6 +144,7 @@ game = function() {
       return
     }
     let selectedWeapon = $(this).attr('id');
+    $(this).addClass('selected')
     weapons.child(playerID).set(selectedWeapon);
   });
 }

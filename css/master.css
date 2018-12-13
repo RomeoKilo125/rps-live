@@ -64,6 +64,10 @@ h1 {
   display: inline-block;
 }
 
+.selected {
+  background-color: #a00;
+}
+
 #scoreArea {
   display: grid;
   grid-template-rows: repeat(2, 1fr);
